@@ -1,11 +1,16 @@
 var Greeter = React.createClass({
     render: function () {
-        return (
+        return React.createElement(
+            'h1',
+            null,
+            'Hello React.createElement'
+        );
+        /*return (
             <div>
                 <h1>Hello React !!!</h1>
                 <p>This is from component too</p>
             </div>
-        );
+        );*/
     }
 });
 
