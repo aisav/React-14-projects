@@ -1,44 +1,80 @@
+var GreeterMessage = React.createClass({
+    render: function () {
+        var name = this.props.name;
+        var message = this.props.message;
+        return (
+            <div>
+                <h1>Hello {name}!</h1>
+                <p>{message}</p>
+            </div>
+        )
+
+    }
+});
+
+
+var GreeterForm = React.createClass({
+    onFormSubmit: function (e) {
+        e.preventDefault();
+
+        var name = this.refs.name.value;
+
+        if(typeof name==='string' && name.length>0) {
+            this.refs.name.value = '';
+            this.props.onNewName(name);
+
+        }
+    },
+
+    render: function () {
+        return (
+            <div>
+                <form onSubmit={this.onFormSubmit}>
+                    <input type="text" ref="name"/>
+                    <button >Set name</button>
+                </form>
+            </div>
+        )
+    }
+});
+
 
 var Greeter = React.createClass({
     getDefaultProps: function () {
         return {
             name: 'React',
-            message: 'This is the default message!'
+            message: 'This is the default message!',
+
         };
     },
-    onButtonClick: function (e) {
-        e.preventDefault();
 
-        var prm = this.refs.prm.value;
-        alert(prm);
+    getInitialState: function () {
+        return {
+            name: this.props.name
+        };
+    },
+
+    handleNewName: function (name) {
+        this.setState({
+            name: name
+        });
 
     },
+
     render: function () {
-        var name = this.props.name;
         var message = this.props.message;
-/*        return React.createElement(
-            'h1',
-            null,
-            'Hello React.createElement'
-        );*/
+        var name = this.state.name;
         return (
             <div>
-                <h1>Hello {name} !!!</h1>
-                <p>{message + '!!'}</p>
-
-                <form onSubmit={this.onButtonClick}>
-                    <input type="text" ref="prm"/>
-                    <button >Click Me</button>
-                </form>
+                <GreeterMessage name={name} message={message}/>
+                <GreeterForm onNewName = {this.handleNewName}/>
             </div>
         );
     }
 });
 
-var firstName = 'Artur';
 
 ReactDOM.render(
-    <Greeter name={firstName}/>,
-    //<Greeter />,        //with default atribute name, its value is React, on line 7:
+    <Greeter />,
     document.getElementById("app")
 );
