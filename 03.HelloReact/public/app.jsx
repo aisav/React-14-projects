@@ -7,8 +7,7 @@ var GreeterMessage = React.createClass({
                 <h1>Hello {name}!</h1>
                 <p>{message}</p>
             </div>
-        )
-
+        );
     }
 });
 
@@ -17,21 +16,37 @@ var GreeterForm = React.createClass({
     onFormSubmit: function (e) {
         e.preventDefault();
 
+        var updates = {};
         var name = this.refs.name.value;
+        var message = this.refs.message.value;
 
-        if(typeof name==='string' && name.length>0) {
+        if (typeof name === 'string' && name.length > 0) {
             this.refs.name.value = '';
-            this.props.onNewName(name);
-
+            updates.name = name;
         }
+
+        if (typeof message === 'string' && message.length > 0) {
+            this.refs.message.value = '';
+            updates.message = message;
+        }
+
+        this.props.onNewUpdate(updates);
+
     },
 
     render: function () {
         return (
             <div>
                 <form onSubmit={this.onFormSubmit}>
-                    <input type="text" ref="name"/>
-                    <button >Set name</button>
+                    <div>
+                        <input type="text" ref="name" placeholder="Enter name"/>
+                    </div>
+                    <div>
+                        <textarea ref="message" placeholder="Enter message"></textarea>
+                    </div>
+                    <div>
+                        <button>Submit</button>
+                    </div>
                 </form>
             </div>
         )
@@ -50,24 +65,22 @@ var Greeter = React.createClass({
 
     getInitialState: function () {
         return {
-            name: this.props.name
+            name: this.props.name,
+            message: this.props.message
         };
     },
 
-    handleNewName: function (name) {
-        this.setState({
-            name: name
-        });
-
+    handleNewUpdate: function (updates) {
+        this.setState(updates);
     },
 
     render: function () {
-        var message = this.props.message;
+        var message = this.state.message;
         var name = this.state.name;
         return (
             <div>
                 <GreeterMessage name={name} message={message}/>
-                <GreeterForm onNewName = {this.handleNewName}/>
+                <GreeterForm onNewUpdate={this.handleNewUpdate}/>
             </div>
         );
     }
@@ -75,6 +88,6 @@ var Greeter = React.createClass({
 
 
 ReactDOM.render(
-    <Greeter />,
+    <Greeter/>,
     document.getElementById("app")
 );
