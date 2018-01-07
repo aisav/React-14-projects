@@ -48,6 +48,8 @@
 
 	greeter();
 
+	//                  webpack .\public\app.js .\public\bundle.js
+
 /***/ },
 /* 1 */
 /***/ function(module, exports) {
