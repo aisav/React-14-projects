@@ -51,7 +51,8 @@
 
 	var Greeter = __webpack_require__(159);
 
-	ReactDOM.render(React.createElement(Greeter, null), document.getElementById("app"));
+	var firstName = "Artur";
+	ReactDOM.render(React.createElement(Greeter, { name: firstName }), document.getElementById("app"));
 
 /***/ },
 /* 1 */
@@ -19764,7 +19765,7 @@
 	    getDefaultProps: function getDefaultProps() {
 	        return {
 	            name: 'React',
-	            message: 'This is the default message!'
+	            message: 'This is the default message!!!'
 
 	        };
 	    },
