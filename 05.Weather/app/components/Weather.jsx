@@ -1,12 +1,13 @@
 var React = require('react');
 var WeatherForm = require('WeatherForm');
 var WeatherMessage = require('WeatherMessage');
+var OpenWeatherMap = require('OpenWeatherMap');
 
 var Weather = React.createClass({
     getDefaultProps: function () {
         return {
             loc: 'Yerevan',
-            temp: '22'
+            temp: '0'
         };
     },
 
@@ -18,7 +19,11 @@ var Weather = React.createClass({
     },
 
     handleNewUpdate: function (updates) {
-        this.setState(updates);
+        OpenWeatherMap.getTemp(updates.loc).
+            then(
+            (temp) => {updates.temp=temp;        this.setState(updates);},
+            (err) => {alert(err)}
+        )
     },
 
     render: function () {
