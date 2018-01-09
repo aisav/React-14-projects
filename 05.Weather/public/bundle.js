@@ -24939,35 +24939,45 @@
 	var Weather = React.createClass({
 	    displayName: 'Weather',
 
-	    getDefaultProps: function getDefaultProps() {
-	        return {
-	            loc: 'Yerevan',
-	            temp: '0'
-	        };
-	    },
 
 	    getInitialState: function getInitialState() {
 	        return {
-	            loc: this.props.loc,
-	            temp: this.props.temp
+	            isLoading: false
 	        };
 	    },
 
 	    handleNewUpdate: function handleNewUpdate(updates) {
 	        var _this = this;
 
+	        this.setState({ isLoading: true });
 	        OpenWeatherMap.getTemp(updates.loc).then(function (temp) {
-	            updates.temp = temp;_this.setState(updates);
+	            updates.temp = temp;
+	            _this.setState(updates);
+	            _this.setState({ isLoading: false });
 	        }, function (err) {
+	            _this.setState({ isLoading: false });
 	            alert(err);
 	        });
 	    },
 
 	    render: function render() {
 	        var _state = this.state,
+	            isLoading = _state.isLoading,
 	            loc = _state.loc,
 	            temp = _state.temp;
 
+
+	        function renderWeather() {
+	            if (isLoading) {
+	                return React.createElement(
+	                    'h3',
+	                    null,
+	                    'Loading...'
+	                );
+	            } else if (temp && loc) {
+	                return React.createElement(WeatherMessage, { loc: loc, temp: temp });
+	            }
+	        }
 
 	        return React.createElement(
 	            'div',
@@ -24978,7 +24988,7 @@
 	                'Weather Component'
 	            ),
 	            React.createElement(WeatherForm, { onNewUpdateAtrF: this.handleNewUpdate }),
-	            React.createElement(WeatherMessage, { loc: loc, temp: temp })
+	            renderWeather()
 	        );
 	    }
 	});

@@ -4,38 +4,48 @@ var WeatherMessage = require('WeatherMessage');
 var OpenWeatherMap = require('OpenWeatherMap');
 
 var Weather = React.createClass({
-    getDefaultProps: function () {
-        return {
-            loc: 'Yerevan',
-            temp: '0'
-        };
-    },
 
     getInitialState: function () {
         return {
-            loc: this.props.loc,
-            temp: this.props.temp
+            isLoading: false
         };
     },
 
     handleNewUpdate: function (updates) {
-        OpenWeatherMap.getTemp(updates.loc).
-            then(
-            (temp) => {updates.temp=temp;        this.setState(updates);},
-            (err) => {alert(err)}
+        this.setState({isLoading: true});
+        OpenWeatherMap.getTemp(updates.loc).then(
+            (temp) => {
+                updates.temp = temp;
+                this.setState(updates);
+                this.setState({isLoading: false});
+            },
+            (err) => {
+                this.setState({isLoading: false});
+                alert(err);
+            }
         )
     },
 
     render: function () {
-        var {loc, temp} = this.state;
+        var {isLoading, loc, temp} = this.state;
+
+        function renderWeather() {
+            if (isLoading) {
+                return (<h3>Loading...</h3>);
+            }
+            else if (temp && loc) {
+                return (                    <WeatherMessage loc={loc} temp={temp}/>);
+            }
+        }
 
         return (
             <div>
                 <h3>Weather Component</h3>
-                <WeatherForm onNewUpdateAtrF= { this.handleNewUpdate }/>
-                <WeatherMessage loc={loc} temp={temp}/>
+                <WeatherForm onNewUpdateAtrF={this.handleNewUpdate}/>
+                {renderWeather()}
             </div>
         );
+
     }
 });
 
