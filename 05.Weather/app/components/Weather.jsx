@@ -12,6 +12,7 @@ var Weather = React.createClass({
     },
 
     handleNewUpdate: function (updates) {
+        // debugger;
         this.setState({isLoading: true});
         OpenWeatherMap.getTemp(updates.loc).then(
             (temp) => {

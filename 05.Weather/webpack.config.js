@@ -29,5 +29,8 @@ module.exports = {
                 exclude: /(node_modules|bower_components)/
             }
         ]
-    }
+    },
+    devtool:  "inline-source-map"
 };
+
+//           "inline-source-map" or "eval-source-map"
