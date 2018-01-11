@@ -11,31 +11,45 @@ var Weather = React.createClass({
         };
     },
 
-    handleNewUpdate: function (updates) {
+    handleNewUpdate: function (location) {
         // debugger;
+        var that = this;
         this.setState({isLoading: true});
-        OpenWeatherMap.getTemp(updates.loc).then(
-            (temp) => {
-                updates.temp = temp;
-                this.setState(updates);
-                this.setState({isLoading: false});
+        OpenWeatherMap.getTemp(location).then(
+            function (temp) {
+                that.setState({
+                    location: location,
+                    temp: temp,
+                    isLoading: false
+                });
             },
-            (err) => {
-                this.setState({isLoading: false});
-                alert(err);
+            function (e) {
+                that.setState({
+                    isLoading: false,
+                    err: e.message
+                });
+                alert(e.message);
             }
         )
     },
 
+    componentDidMount: function () {
+        var location = this.props.location.query.location;
+
+        if ( location  && location.length > 0) {
+            this.handleNewUpdate(location);
+        }
+    },
+
     render: function () {
-        var {isLoading, loc, temp} = this.state;
+        var {isLoading, location, temp} = this.state;
 
         function renderWeather() {
             if (isLoading) {
                 return (<h3 className="text-center">Loading...</h3>);
             }
-            else if (temp && loc) {
-                return (                    <WeatherMessage loc={loc} temp={temp}/>);
+            else if (temp && location) {
+                return (                    <WeatherMessage location={location} temp={temp}/>);
             }
         }
 
