@@ -26,7 +26,7 @@ module.exports = {
             Countdown: 'app/components/Countdown.jsx',
 
             OpenWeatherMap: 'app/api/OpenWeatherMap.jsx',
-            applicationStyles: 'app/styles/app.css'
+            applicationStyles: 'app/styles/app.scss'
         },
         extensions: ['', '.js', '.jsx']
     },

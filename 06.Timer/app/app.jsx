@@ -10,7 +10,7 @@ require('style!css!foundation-sites/dist/foundation.min.css');
 $(document).foundation();
 
 //App.css
-require('style!css!applicationStyles')
+require('style!css!sass!applicationStyles')
 
 ReactDOM.render(
   <Router history={hashHistory}>
@@ -21,3 +21,10 @@ ReactDOM.render(
   </Router>,
   document.getElementById('app')
 );
+
+
+//phyton error
+//    https://github.com/felixrieseberg/windows-build-tools/issues/56
+//is donw with admin in comand
+//    npm install --global --production windows-build-tools
+//most likes        npm --add-python-to-path='true' --debug install --global windows-build-tools
