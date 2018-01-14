@@ -8,14 +8,16 @@ module.exports = {
         var encodedLocation = encodeURIComponent(loc);
         var requestUrl = `${WEATHER_MAP_URL}&q=${encodedLocation}`;
 
-        return axios.get(requestUrl).then(function (res) {
+        return axios.get(requestUrl).then(
+            function (res) {
             // debugger;
             if (res.data.cod && res.data.message) {
                 throw new Error(res.data.message);
             } else {
                 return res.data.main.temp;
             }
-        }, function (res) {
+        },
+            function (res) {
             throw new Error(res.data.message);
         });
     }

@@ -2,17 +2,16 @@ var React = require('react');
 
 var WeatherForm = React.createClass({
     onFormSubmit: function (e) {
+        // debugger;
         e.preventDefault();
 
-        var updates = {};
         var location = this.refs.location.value;
 
         if (typeof location === 'string' && location.length > 0) {
             this.refs.location.value = '';
-            updates.location = location;
         }
 
-        this.props.onNewUpdateAtrF(updates);
+        this.props.onNewUpdateAtrF(location);
     },
 
     render: function () {

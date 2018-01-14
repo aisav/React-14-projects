@@ -12,6 +12,7 @@ var Weather = React.createClass({
     },
 
     handleNewUpdate: function (location) {
+        // console.log(location+ "==========================");
         // debugger;
         var that = this;
         this.setState({isLoading: true});
@@ -28,7 +29,6 @@ var Weather = React.createClass({
                     isLoading: false,
                     err: e.message
                 });
-                alert(e.message);
             }
         )
     },
@@ -36,20 +36,22 @@ var Weather = React.createClass({
     componentDidMount: function () {
         var location = this.props.location.query.location;
 
-        if ( location  && location.length > 0) {
+        if (location && location.length > 0) {
             this.handleNewUpdate(location);
         }
     },
 
     render: function () {
-        var {isLoading, location, temp} = this.state;
+        var {isLoading, location, temp, err} = this.state;
 
         function renderWeather() {
             if (isLoading) {
                 return (<h3 className="text-center">Loading...</h3>);
             }
-            else if (temp && location) {
-                return (                    <WeatherMessage location={location} temp={temp}/>);
+            else if (err) {
+                return (<h3 className="text-center">{err}</h3>);
+            } else if (temp && location) {
+                return (<WeatherMessage location={location} temp={temp}/>);
             }
         }
 
