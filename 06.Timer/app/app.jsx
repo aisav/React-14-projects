@@ -22,9 +22,11 @@ ReactDOM.render(
   document.getElementById('app')
 );
 
-
 //phyton error
 //    https://github.com/felixrieseberg/windows-build-tools/issues/56
 //is donw with admin in comand
 //    npm install --global --production windows-build-tools
 //most likes        npm --add-python-to-path='true' --debug install --global windows-build-tools
+
+//test dependencies
+// npm install karma@0.13.22 karma-chrome-launcher@0.2.2 karma-mocha@0.2.2 karma-mocha-reporter@2.0.0 karma-sourcemap-loader@0.3.7 karma-webpack@1.7.0 mocha@2.4.5 expect@1.14.0 --save-dev
