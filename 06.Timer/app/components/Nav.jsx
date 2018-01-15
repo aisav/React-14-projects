@@ -6,10 +6,11 @@ var Nav = React.createClass({
         e.preventDefault();
         var location = this.refs.location.value;
         var encodedLocation = encodeURIComponent(location);
-        if(location){
+        if (location) {
             this.refs.location.value = '';
-            window.location.hash = '#/?location='+encodedLocation;
-        }},
+            window.location.hash = '#/?location=' + encodedLocation;
+        }
+    },
     render: function () {
         return (
             <div className="top-bar">
@@ -17,10 +18,12 @@ var Nav = React.createClass({
                     <ul className="menu">
                         <li className="menu-text">Timer with React</li>
                         <li>
-                            <IndexLink to="/" activeClassName="active" activeStyle={{fontWeight: 'bold'}}>Timer</IndexLink>
+                            <IndexLink to="/" activeClassName="active"
+                                       activeStyle={{fontWeight: 'bold'}}>Timer</IndexLink>
                         </li>
                         <li>
-                            <Link to="/coundown" activeClassName="active" activeStyle={{fontWeight: 'bold'}}>Countdown</Link>
+                            <Link to="/coundown" activeClassName="active"
+                                  activeStyle={{fontWeight: 'bold'}}>Countdown</Link>
                         </li>
                     </ul>
                 </div>
@@ -28,7 +31,10 @@ var Nav = React.createClass({
                     <div>
                         <ul className="menu">
                             <li className="menu-text">
-                                Created by Artur Isaverdyan
+                                Created by
+                                <a href="https://www.linkedin.com/in/artur-isaverdyan-444b9899/" target="_blank">
+                                    Artur Isaverdyan
+                                </a>
                             </li>
                         </ul>
                     </div>

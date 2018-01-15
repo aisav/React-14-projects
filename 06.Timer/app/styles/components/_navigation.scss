@@ -7,3 +7,8 @@
     color: $nav-text-color;
   }
 }
+
+.menu > .menu-text > a {
+  display: inline;
+  padding: 0;
+}
