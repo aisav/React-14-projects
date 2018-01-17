@@ -8,7 +8,7 @@ var Clock = React.createClass({
         totalSeconds: React.PropTypes.number
     },
     formatSeconds: function (totalSeconds) {
-        debugger;
+        // debugger;
         var m = Math.floor(totalSeconds / 60);
         var s = totalSeconds % 60;
 
