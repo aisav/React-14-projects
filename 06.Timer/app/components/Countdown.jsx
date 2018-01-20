@@ -47,17 +47,22 @@ var Countdown = React.createClass({
         this.timer = undefined;
     },
 
-    // componentWillUpdate: function (nextProps, nextState) {
-    //     console.log("component will mount");
-    // },
-    //
-    // componentWillMount: function () {
-    //     console.log("component will mount");
-    // },
-    //
-    // componentDidMount: function () {
-    //     console.log("component did mount");
-    // },
+    //---------------------before render-------------------------
+    componentWillMount: function () { },
+    //---------------------immediately after render-------------------------
+    // componentDidMount: function () { },
+    //---------------------when receive new props-------------------------
+    componentWillReceiveProps: function () { },
+    // -------------------------------after receiving new props or state---------
+    shouldComponentUpdate: function () { },
+    // -------------------after receiving new props or state---------------
+    componentWillUpdate: function () { },
+    // -------------------after updates to dom---------------
+    componentDidUpdate: function (nextProps, nextState) { },
+    // before component will removing from dom
+    // componentWillUnmount: function () { },
+
+
     handleSetCountdown: function (seconds) {
         this.setState({
             count: seconds,
@@ -84,6 +89,7 @@ var Countdown = React.createClass({
         }
         return (
             <div>
+                <h1 className="page-title">Countdown</h1>
                 <Clock totalSeconds={count}/>
                 {renderControlArea()}
             </div>
