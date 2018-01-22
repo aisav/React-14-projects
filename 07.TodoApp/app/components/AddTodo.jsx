@@ -1,21 +1,20 @@
 var React = require('react');
 
 var AddTodo = React.createClass({
-    getDefaultProps: function () {
-        return {
-            totalSeconds: 0
-        }
-    },
-    propTypes: {
-        totalSeconds: React.PropTypes.number
-    },
-    formatSeconds: function (totalSeconds) {
-        var m = Math.floor(totalSeconds / 60);
-        var s = totalSeconds % 60;
 
-        m = (m < 10) ? ('0' + m) : m;
-        s = (s < 10) ? ('0' + s) : s;
-        return m + ':' + s;
+
+    newTodo: function (e) {
+
+        e.preventDefault();
+        var text = this.refs.text.value;
+        if (text.length > 0) {
+            this.refs.text.value = '';
+            this.props.onNewTodo(text);
+        }
+        else {
+            this.refs.text.focus;
+        }
+
     },
 
     render: function () {
@@ -23,8 +22,8 @@ var AddTodo = React.createClass({
 
         return (
             <div>
-                <form ref="form" onSubmit={this.onFormSubmit} className="coundown-form">
-                    <input type="text" ref="todo" placeholder="What do You need to do?" />
+                <form ref="form" onSubmit={this.newTodo}>
+                    <input type="text" ref="text" placeholder="What do You need to do?"/>
                     <button className="button expanded">Add Todo</button>
                 </form>
             </div>
