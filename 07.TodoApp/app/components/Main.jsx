@@ -3,34 +3,28 @@ var TodoList = require('TodoList');
 var AddTodo = require('AddTodo');
 var uuidV1 = require('uuid/v1');
 var Search = require('Search');
+var TodoApi = require('TodoApi');
 
 var Main = React.createClass({
     getInitialState: function () {
         return {
             searchCompleted: false,
             searchText: '',
-            todos: [
-                {
-                    id: uuidV1(),
-                    text: "Task A",
-                    completed: true
-                },
-                {
-                    id: uuidV1(),
-                    text: "Task B",
-                    completed: true
-                },
-                {
-                    id: uuidV1(),
-                    text: "Task C",
-                    completed: false
-                }
-            ]
+            todos: TodoApi.getTodos()
         }
+    },
+    componentDidUpdate: function () {
+        TodoApi.setTodos(this.state.todos)
     },
 
     handleToggle: function (id) {
-        alert(id);
+        var updatedTodos = this.state.todos.map(function (todo) {
+            if(todo.id === id) {
+                todo.completed = !todo.completed;
+            }
+            return todo;
+        });
+        this.setState(updatedTodos);
     },
 
     handleSearch: function (searchCompleted, searchText) {
