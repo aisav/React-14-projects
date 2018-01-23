@@ -12,14 +12,25 @@ var Main = React.createClass({
             todos: [
                 {
                     id: uuidV1(),
-                    text: "Task A"
+                    text: "Task A",
+                    completed: true
                 },
                 {
                     id: uuidV1(),
-                    text: "Task B"
+                    text: "Task B",
+                    completed: true
+                },
+                {
+                    id: uuidV1(),
+                    text: "Task C",
+                    completed: false
                 }
             ]
         }
+    },
+
+    handleToggle: function (id) {
+        alert(id);
     },
 
     handleSearch: function (searchCompleted, searchText) {
@@ -32,7 +43,8 @@ var Main = React.createClass({
     handleNewTodo: function (text) {
         var t = {
             id: uuidV1(),
-            text: text
+            text: text,
+            completed: false
         };
         this.setState({
             todos: [
@@ -49,7 +61,7 @@ var Main = React.createClass({
         return (
             <div>
                 <Search onSearch={this.handleSearch}/>
-                <TodoList todos={todos} />
+                <TodoList todos={todos} onToggle={this.handleToggle} />
                 <AddTodo onNewTodo={this.handleNewTodo}/>
             </div>
         )
