@@ -4,6 +4,7 @@ var AddTodo = require('AddTodo');
 var uuidV1 = require('uuid/v1');
 var Search = require('Search');
 var TodoApi = require('TodoApi');
+var moment = require('moment');
 
 var Main = React.createClass({
     getInitialState: function () {
@@ -21,6 +22,7 @@ var Main = React.createClass({
         var updatedTodos = this.state.todos.map(function (todo) {
             if(todo.id === id) {
                 todo.completed = !todo.completed;
+                todo.completedAt = moment().unix()
             }
             return todo;
         });
@@ -38,7 +40,8 @@ var Main = React.createClass({
         var t = {
             id: uuidV1(),
             text: text,
-            completed: false
+            completed: false,
+            createdAt: moment().unix()
         };
         this.setState({
             todos: [
