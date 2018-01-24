@@ -20,7 +20,7 @@ var Main = React.createClass({
 
     handleToggle: function (id) {
         var updatedTodos = this.state.todos.map(function (todo) {
-            if(todo.id === id) {
+            if (todo.id === id) {
                 todo.completed = !todo.completed;
                 todo.completedAt = moment().unix()
             }
@@ -58,13 +58,21 @@ var Main = React.createClass({
         var filteredTodos = TodoApi.filterTodos(todos, showCompleted, searchText);
         return (
             <div>
-                <Search onSearch={this.handleSearch}/>
-                <TodoList todos={filteredTodos} onToggle={this.handleToggle} />
-                <AddTodo onNewTodo={this.handleNewTodo}/>
-            </div>
-        )
-    }
+                <h1 className="page-title">Todo App</h1>
 
+                <div className=" row">
+                    <div className=" column small-centered small-11 medium-6 large-5">
+                        <div>
+                            <Search onSearch={this.handleSearch}/>
+                            <TodoList todos={filteredTodos} onToggle={this.handleToggle}/>
+                            <AddTodo onNewTodo={this.handleNewTodo}/>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        );
+    }
 });
 
 module.exports = Main;

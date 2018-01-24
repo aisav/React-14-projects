@@ -21,7 +21,7 @@ var AddTodo = React.createClass({
         var {totalSeconds} = this.props;
 
         return (
-            <div>
+            <div className="container__footer">
                 <form ref="form" onSubmit={this.newTodo}>
                     <div>
                         <input type="text" ref="text" placeholder="What do You need to do?"/>
