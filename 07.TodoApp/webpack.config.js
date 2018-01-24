@@ -5,12 +5,12 @@ module.exports = {
         'script!foundation-sites/dist/js/foundation.min.js',
         './app/app.jsx'],
     externals: {
-        jquery: 'jQuery',
+        jquery: 'jQuery'
     },
     plugins: [
         new webpack.ProvidePlugin({
             '$': 'jquery',
-            'jquery': 'jquery',
+            'jQuery': 'jquery'
         })
     ],
     output: {
