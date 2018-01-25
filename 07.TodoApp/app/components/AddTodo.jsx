@@ -18,7 +18,6 @@ var AddTodo = React.createClass({
     },
 
     render: function () {
-        var {totalSeconds} = this.props;
 
         return (
             <div className="container__footer">
