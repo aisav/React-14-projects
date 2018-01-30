@@ -33,6 +33,14 @@ var reducer = (state = stateDefault, action) => {
 
             };
 
+        case 'REMOVE_HOBBY':
+            return {
+                ...state,
+                hobbies: state.hobbies.filter( (hobby) => {
+                    return hobby.id !== action.id
+                })
+            }
+
         case 'ADD_MOVIE':
             return {
                 ...state,
@@ -45,6 +53,14 @@ var reducer = (state = stateDefault, action) => {
                     }
                 ]
             };
+
+        case 'REMOVE_MOVIE':
+            return {
+                ...state,
+                movies: state.movies.filter( (movie) => {
+                    return movie.id !== action.id
+                })
+            }
 
         default:
             return state;
@@ -60,7 +76,7 @@ var unsubscribe = store.subscribe(() => {
 
     document.getElementById('app').innerHTML = state.name;
 
-    console.log('====================================handle change', state);
+    console.log('====================================after change', state);
 
 });
 // unsubscribe();
@@ -79,6 +95,16 @@ store.dispatch({
 });
 
 store.dispatch({
+    type: 'ADD_HOBBY',      //action name
+    hobby: 'walking'
+});
+
+store.dispatch({
+    type: 'REMOVE_HOBBY',      //action name
+    id: 2
+});
+
+store.dispatch({
     type: 'CHANGE_NAME',      //action name
     name: 'Tom'
 });
@@ -87,6 +113,17 @@ store.dispatch({
     type: 'ADD_MOVIE',      //action name
     title: 'the title',
     janre: 'the janre'
+});
+
+store.dispatch({
+    type: 'ADD_MOVIE',      //action name
+    title: 'the title2222',
+    janre: 'the janre2222'
+});
+
+store.dispatch({
+    type: 'REMOVE_MOVIE',      //action name
+    id: 1
 });
 
 
